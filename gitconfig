@@ -1,0 +1,60 @@
+[http]
+[rebase]
+	autostash = true
+[core]
+	excludesfile = ~/.gitignore
+[help]
+	autocorrect = 30
+[merge]
+    	tool = intellij
+[mergetool "intellij"]
+    	cmd = /path/to/idea.sh merge $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
+    	trustExitCode = true
+[diff]
+	tool = intellij
+[difftool "intellij"]
+    	cmd = /path/to/idea.sh diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
+[push]
+	default = simple
+[alias]
+        ci = commit --allow-empty 
+	chp = !git cherry-pick 
+	sts = status -s
+	st = status
+	ss = stash save
+	ssa = stash save -u
+	ssx = stash save -a
+	sp = stash pop
+	co = checkout
+	rd = rebase develop
+	po = push origin
+	ri = rebase -i
+	x = commit -m
+	xm = commit
+	a = add
+	ap = add -p
+	au = add -u
+	an = add -N
+	af = add -f
+	lo = log --oneline --decorate --branches --remotes --tags --graph --oneline --decorate HEAD --date=relative
+	lg = log --graph --oneline --decorate --date=relative
+	lga = log --oneline --decorate --graph --branches --remotes --tags --date=relative
+	hback = reset --hard
+	sback = reset --soft
+	back = reset
+	pl = pull origin
+	pod = push -u origin develop
+	pom = push -u origin master
+	pou = push -u origin '$(git symbolic-ref --short HEAD)'
+	cob = checkout -b
+	this = !git init && git commit --allow-empty -m 'initial  commit' && git cob  develop && git sts && git lo
+        squareone = !git commit --allow-empty -m 'initial  commit' && git cob  develop && git lo && git push origin develop && git push origin master && git lo
+	finda = "!grepalias() { git config --global --get-regexp alias | grep -i \"$1\" | awk -v nr=2 '{sub(/^alias\\./,\"\")};{printf \"\\033[31m %10s \\033[1;37m\", $1};{sep=FS};{for (x=nr; x<=NF; x++) {printf \"%s%s\", sep, $x; }; print \"\\033[0;39m\"}'; }; grepalias"
+	amend = commit --amend --no-edit
+	amendFull = commit --amend -C HEAD
+	rlg = log -g --oneline --date=relative
+	idx = !git diff --cached --stat
+	index = !git diff --cached
+	force = !git push --force-with-lease
+[rerere]
+	enabled = true

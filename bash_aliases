@@ -2,6 +2,7 @@
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias lt='ls -lart'
 alias fuck='sudo $(history -p \!\!)' 
 alias shit='sudo $(history -p \!\!)' 
 alias cmon='sudo $(history -p \!\!)' 
@@ -73,6 +74,10 @@ alias du1='du -d 1'
 # open last edited file
 alias lvim="vim -c \"normal '0\""
 #alias ungit="find . -name '.git' -exec rm -rf {} \;"
+
+#copy / paste
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
